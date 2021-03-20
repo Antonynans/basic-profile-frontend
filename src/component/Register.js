@@ -20,11 +20,16 @@ export default function Register({history}) {
         setSubmitting(false);
         axios.post("http://localhost:5000/register", values)
         .then(res => {
-          console.log(res);
-          history.push("/login");
-        })
-        .catch(err => {
-          console.log(err);
+          console.log(res.data.result);
+          if (res.data.result === "success") {
+            alert("Success!", res.data.message, "success")
+            history.push("/login");
+          } else if (res.data.result === "error") {
+            alert("Error!", res.data.message, "error");
+            }
+        }) 
+        .catch(error => {
+          console.log(error);
         });
       }}
 
