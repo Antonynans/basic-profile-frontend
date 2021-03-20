@@ -1,3 +1,7 @@
+body {
+  background-color: royalblue;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -8,23 +12,12 @@
   text-align: center;
 }
 
-form {
-  /* height: 55px; */
-}
-
 .formGroup {
   height: 50px;
 }
 
 input {
   height: 30px;
-}
-
-.input-feedback {
-  color: rgb(235, 54, 54);
-  margin-top: -22px;
-  font-size: 11px;
-  margin-bottom: 9px;
 }
 
 .text-danger {
@@ -34,6 +27,6 @@ input {
   justify-content: center;
 }
 
-.is-invalid {
-  border: red;
+input.error {
+  border: 1px solid red;
 }

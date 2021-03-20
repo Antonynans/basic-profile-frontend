@@ -18,7 +18,14 @@ export default function Register({history}) {
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
         setSubmitting(false);
-        history.push("/login");
+        axios.post("http://localhost:5000/register", values)
+        .then(res => {
+          console.log(res);
+          history.push("/login");
+        })
+        .catch(err => {
+          console.log(err);
+        });
       }}
 
       validationSchema = {Yup.object().shape({
