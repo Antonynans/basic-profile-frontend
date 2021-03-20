@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const jwt = require("./jwt");
 
 require('dotenv').config();
+require("./db");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false }));
 app.use(bodyParser.json());
-app.get("/", function(req, res, next) {
-  return res.send("Hello Node.js");
-})
+// app.get("/", function(req, res, next) {
+//   return res.send("Hello Node.js");
+// })
 const User = require("./models/userSchema");
 
 app.post("/login", async (req, res) => {
@@ -52,10 +52,10 @@ app.post("/register", async (res, req) => {
   }
 })
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("MongoDB database connection established succesfully");
-})
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+//     console.log("MongoDB database connection established succesfully");
+// })
 
 
 app.listen(port, () => {
