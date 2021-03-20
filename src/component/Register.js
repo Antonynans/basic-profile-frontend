@@ -2,8 +2,10 @@ import React from 'react';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import "./register.css";
 
-export default function Register() {
+
+export default function Register({history}) {
   return(
     <Formik
       initialValues={{
@@ -16,6 +18,7 @@ export default function Register() {
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
         setSubmitting(false);
+        history.push("/login");
       }}
 
       validationSchema = {Yup.object().shape({
@@ -30,10 +33,11 @@ export default function Register() {
         email: Yup.string()
           .email("Invalid Email")
           .required("Email is Required"),
-        password: Yup.string().required("Password is required"),
-        confirm_password: Yup.string().oneOf(
+        password: Yup.string().required("Password is required")
+        .min(8, "Password is too short - must be at least 8 characters."),
+        confirmPassword: Yup.string().oneOf(
           [Yup.ref("password"), null],
-          "Both password need to be the same"
+          "Both passwords need to be the same"
         )
       })}
     >
@@ -45,7 +49,6 @@ export default function Register() {
         errors,
         isSubmitting,
         handleChange,
-        handleBlur,
         handleSubmit,
       } = props;
         
@@ -54,31 +57,67 @@ export default function Register() {
     <div className="container">
       <div className="formContainer">
         <p>Registration Form</p>
-        <div className="form" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="formGroup">
             <input type="text" id="firstName" placeholder="First Name"
-            value={values.firstName} onChange={handleChange}/>
+            value={values.firstName} onChange={handleChange} required autoFocus
+            className={
+              errors.firstName && touched.firstName && "error"}/>
+            {errors.firstName && touched.firstName && (
+              <small id="passwordHelp" className="text-danger">
+                {errors.firstName}
+              </small>
+            )}
           </div>
           <div className="formGroup">
             <input type="text" id="lastName" placeholder="Last Name"
-            value={values.lastName} onChange={handleChange}/>
+            value={values.lastName} onChange={handleChange} required
+            className={
+              errors.lastName && touched.lastName && "error"}/>
+            {errors.lastName && touched.lastName && (
+              <small id="passwordHelp" className="text-danger">
+                {errors.lastName}
+              </small>
+            )}
           </div>
           <div className="formGroup">
             <input type="text" id="email" placeholder="Email"
-            value={values.email} onChange={handleChange}/>
-          </div>
+            value={values.email} onChange={handleChange} required
+            className={
+              errors.email && touched.email && "error"}/>
+            {errors.email && touched.email && (
+              <small id="passwordHelp" className="text-danger">
+                {errors.email}
+              </small>
+            )}
+          </div> 
           <div className="formGroup">
             <input type="password" id="password" placeholder="Password"
-            value={values.password} onChange={handleChange}/>
+            value={values.password} onChange={handleChange} required
+            className={
+              errors.password && touched.password && "error"}/>
+            {errors.password && touched.password && (
+              <small id="passwordHelp" className="text-danger">
+                {errors.password}
+              </small>
+            )}
           </div>
           <div className="formGroup">
             <input type="password" id="confirmPassword" placeholder="Confirm Password"
-            value={values.confirmPassword} onChange={handleChange}/>
+            value={values.confirmPassword} onChange={handleChange} required
+            className={
+              errors.confirmPassword && touched.confirmPassword && "error"}/>
+            {errors.confirmPassword && touched.confirmPassword && (
+              <small id="passwordHelp" className="text-danger">
+                {errors.confirmPassword}
+              </small>
+            )}
           </div>
-          <div className="button">
-            <button disabled={isSubmitting} type="submit">Submit</button>
+          
+          <div className="btn btn-primary">
+            <button type="submit" disabled={isSubmitting} >Submit</button>
           </div>
-        </div>
+        </form>
       </div>
       
     </div>
