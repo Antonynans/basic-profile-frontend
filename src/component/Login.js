@@ -15,7 +15,23 @@ export default function Login({history}) {
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
         setSubmitting(false);
-        history.push("/dashboard");
+        axios
+        .post("http://localhost:5000/login", values)
+        .then(res => {
+          if (res.data.result === "success") {
+            localStorage.setItem("TOKEN_KEY", res.data.token);
+            alert("Success!", res.data.message, "success")
+              history.push("/dashboard");
+          } else if (res.data.message === "Invalid password") {
+            alert("Invalid password!", res.data.message, "Invalid password");
+          } else if (res.data.message === "Invalid email") {
+            alert("Invalid email!", res.data.message, "Invalid email");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Error!", error, "error");
+        });
       }}
 
       validationSchema = {Yup.object().shape({
@@ -66,10 +82,23 @@ export default function Login({history}) {
               </small>
             )}
           </div>
-          
-          <div className="btn btn-primary">
-            <button type="submit" disabled={isSubmitting} >Submit</button>
+          <div className="ichceck">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
           </div>
+          <div className="btn btn-primary">
+            <button type="submit" disabled={isSubmitting} >Sign In</button>
+            <button
+              type="button"
+              onClick={() => {
+                history.push("/register");
+              }}
+              className="btn btn-default btn-block btn-flat"
+            >
+              not yet registered?
+            </button>
+          </div>
+          
         </form>
       </div>
       

@@ -11,6 +11,8 @@
 # production
 /build
 /backend/.env
+/backend/private.key
+/backend/public.key
 
 # misc
 .DS_Store

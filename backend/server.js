@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
 const jwt = require("./jwt");
 
 require('dotenv').config();
@@ -12,8 +11,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: false }));
-app.use(bodyParser.json());
+
 // app.get("/", function(req, res, next) {
 //   return res.send("Hello Node.js");
 // })
@@ -42,15 +40,15 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/register", async (res, req) => {
+app.post("/register", async (req, res) => {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 8);
     await User.create(req.body);
-    res.json({ result: "success", message: "Registration successful!" });
-  } catch (error) {
-    res.json({ result:"error", message: error.errmsg });
+    res.json({ result: "success", message: "Register successfully" });
+  } catch (err) {
+    res.json({ result: "error", message: err.errmsg });
   }
-})
+});
 
 // const connection = mongoose.connection;
 // connection.once('open', () => {

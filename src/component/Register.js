@@ -25,7 +25,7 @@ export default function Register({history}) {
             alert("Success!", res.data.message, "success")
             history.push("/login");
           } else if (res.data.result === "error") {
-            alert("Error!", res.data.message, "error");
+            alert("Email already exist!", res.data.message, "error");
             }
         }) 
         .catch(error => {
@@ -128,6 +128,14 @@ export default function Register({history}) {
           
           <div className="btn btn-primary">
             <button type="submit" disabled={isSubmitting} >Submit</button>
+            <button type="button"
+              onClick={() => {
+                history.push("/login");
+              }}
+              className="btn btn-default btn-block btn-flat"
+            >
+              already registered?
+            </button>
           </div>
         </form>
       </div>

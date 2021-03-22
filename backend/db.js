@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true });
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 mongoose.connection.on("connected", function() {
   console.log("Mongoose default connection open");
