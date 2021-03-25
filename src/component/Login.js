@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import "./register.css";
+import swal from "sweetalert";
+// import "./register.css";
 
 
 export default function Login({history}) {
+  useEffect(() => {
+    if (localStorage.getItem("TOKEN_KEY") != null) {
+      return history.goBack();
+    }
+    
+  },)
+  
   return(
     <Formik
       initialValues={{
@@ -20,17 +28,17 @@ export default function Login({history}) {
         .then(res => {
           if (res.data.result === "success") {
             localStorage.setItem("TOKEN_KEY", res.data.token);
-            alert("Success!", res.data.message, "success")
+            swal("Success!", res.data.message, "success")
               history.push("/dashboard");
           } else if (res.data.message === "Invalid password") {
-            alert("Invalid password!", res.data.message, "Invalid password");
+            swal("Invalid password!", res.data.message, "Invalid password");
           } else if (res.data.message === "Invalid email") {
-            alert("Invalid email!", res.data.message, "Invalid email");
+            swal("Invalid email!", res.data.message, "Invalid email");
           }
         })
         .catch(error => {
           console.log(error);
-          alert("Error!", error, "error");
+          swal("Error!", error, "error");
         });
       }}
 
@@ -82,6 +90,9 @@ export default function Login({history}) {
               </small>
             )}
           </div>
+          <p class="mb-1">
+              <a href="forgot-password.html">I forgot my password</a>
+            </p>
           <div className="ichceck">
               <input type="checkbox" id="remember" />
               <label for="remember">Remember me</label>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -6,6 +6,12 @@ import "./register.css";
 
 
 export default function Register({history}) {
+  useEffect(() => {
+    if (localStorage.getItem("TOKEN_KEY") != null) {
+      return history.goBack();
+    }
+    
+  },)
   return(
     <Formik
       initialValues={{

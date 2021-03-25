@@ -1,5 +1,5 @@
 body {
-  background-color: royalblue;
+  background-color: grey;
 }
 
 .container {
@@ -17,7 +17,7 @@ body {
 }
 
 input {
-  height: 30px;
+  /* height: 30px; */
 }
 
 .text-danger {
@@ -30,3 +30,12 @@ input {
 input.error {
   border: 1px solid red;
 }
+
+.btn-primary {
+  background-color: inherit;
+  border-color: grey;
+}
+  .btn-primary:hover {
+    background-color: inherit;
+    border-color: grey;
+  }
