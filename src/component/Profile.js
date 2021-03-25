@@ -113,6 +113,24 @@ export default function Profile() {
   let result = state.response
     console.log(result)
 
+    const showPreviewImage = values => {
+      console.log(state.response.avatar)
+      return (
+        <div className='text-center'>
+          <img alt="preview"
+            id='avatars'
+            src={
+              values.file_obj != null
+                ? values.file_obj
+                : 'http://localhost:5000/images/user.png'
+            }
+            className='profile-user-img img-fluid img-circle'
+            width={100}
+          />
+        </div>
+      )
+    }
+
   return (
   <Formik
     enableReinitialize={true}
