@@ -3,48 +3,48 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import swal from 'sweetalert';
-import fs from 'fs';
+// import fs from 'fs';
 
 
 const FILE_SIZE = 160 * 1024
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
 
-const ProfileSchema = Yup.object().shape({
-  avatars: Yup.mixed()
-    .required('A file is required')
-    .test(
-      'fileSize',
-      'File too large',
-      value => value && value.size <= FILE_SIZE
-    )
-    .test(
-      'fileFormat',
-      'Unsupported Format',
-      value => value && SUPPORTED_FORMATS.includes(value.type)
-    ),
-  username: Yup.string()
-    .min(2, 'username is Too Short!')
-    .max(50, 'username is Too Long!')
-    .required('username is Required'),
-  first_name: Yup.string()
-    .min(2, 'firstname is Too Short!')
-    .max(30, 'firstname is Too Long!')
-    .required('firstname is Required'),
-  last_name: Yup.string()
-    .min(2, 'lastname is Too Short!')
-    .max(30, 'lastname is Too Long!')
-    .required('lastname is Required'),
-  phone: Yup.number('Phone number is not valid')
-    .min(10, 'Phone number is too short!')
-    .required('Phone number is Required'),
-  address: Yup.string()
-    .min(12, 'address is Too Short!')
-    .max(50, 'address is Too Long!')
-    .required('address is Required'),
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Email is Required')
-})
+// const ProfileSchema = Yup.object().shape({
+//   avatars: Yup.mixed()
+//     .required('A file is required')
+//     .test(
+//       'fileSize',
+//       'File too large',
+//       value => value && value.size <= FILE_SIZE
+//     )
+//     .test(
+//       'fileFormat',
+//       'Unsupported Format',
+//       value => value && SUPPORTED_FORMATS.includes(value.type)
+//     ),
+//   username: Yup.string()
+//     .min(2, 'username is Too Short!')
+//     .max(50, 'username is Too Long!')
+//     .required('username is Required'),
+//   first_name: Yup.string()
+//     .min(2, 'firstname is Too Short!')
+//     .max(30, 'firstname is Too Long!')
+//     .required('firstname is Required'),
+//   last_name: Yup.string()
+//     .min(2, 'lastname is Too Short!')
+//     .max(30, 'lastname is Too Long!')
+//     .required('lastname is Required'),
+//   phone: Yup.number('Phone number is not valid')
+//     .min(10, 'Phone number is too short!')
+//     .required('Phone number is Required'),
+//   address: Yup.string()
+//     .min(12, 'address is Too Short!')
+//     .max(50, 'address is Too Long!')
+//     .required('address is Required'),
+//   email: Yup.string()
+//     .email('Invalid email')
+//     .required('Email is Required')
+// })
 
 export default function Profile() {
   const [state, setState] = useState({
@@ -163,7 +163,42 @@ export default function Profile() {
       submitForm(formData)
       setSubmitting(false)
     }}
-    validationSchema={ProfileSchema}
+    validationSchema = {Yup.object().shape({
+      avatars: Yup.mixed()
+        .required('A file is required')
+        .test(
+          'fileSize',
+          'File too large',
+          value => value && value.size <= FILE_SIZE
+        )
+        .test(
+          'fileFormat',
+          'Unsupported Format',
+          value => value && SUPPORTED_FORMATS.includes(value.type)
+        ),
+      username: Yup.string()
+        .min(2, 'username is Too Short!')
+        .max(50, 'username is Too Long!')
+        .required('username is Required'),
+      first_name: Yup.string()
+        .min(2, 'firstname is Too Short!')
+        .max(30, 'firstname is Too Long!')
+        .required('firstname is Required'),
+      last_name: Yup.string()
+        .min(2, 'lastname is Too Short!')
+        .max(30, 'lastname is Too Long!')
+        .required('lastname is Required'),
+      phone: Yup.number('Phone number is not valid')
+        .min(10, 'Phone number is too short!')
+        .required('Phone number is Required'),
+      address: Yup.string()
+        .min(12, 'address is Too Short!')
+        .max(50, 'address is Too Long!')
+        .required('address is Required'),
+      email: Yup.string()
+        .email('Invalid email')
+        .required('Email is Required')
+    })}
   >
 
   {props => {
@@ -179,7 +214,7 @@ export default function Profile() {
         
   
   return(
-    <>
+    <div>
     <div className='content-wrapper'>
       <section className='content-header'>
         <div className='container-fluid'>
@@ -365,10 +400,11 @@ export default function Profile() {
   </button>
 </div>
 </form>
-</>
+</div>
+
 )
 }
 })
   </Formik>
-  )
-}
+  );
+};

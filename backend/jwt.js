@@ -15,7 +15,7 @@ module.exports = {
           issuer: 	i,
           subject: 	s,
           audience: 	a,
-          expiresIn: "1d",    // 30 days validity
+          expiresIn: "12h",    // 12 hours validity
           algorithm: "RS256"
       };
       return jwt.sign(payload, privateKEY, signOptions);
@@ -45,5 +45,5 @@ module.exports = {
         next();
     });
 
-}
+    }
 }

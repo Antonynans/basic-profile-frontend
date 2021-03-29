@@ -3,6 +3,10 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require("./jwt");
 
+const formidable = require("formidable");
+const path = require("path");
+const fs = require("fs-extra");
+
 require('dotenv').config();
 require("./db");
 
@@ -16,6 +20,37 @@ app.use(express.json());
 //   return res.send("Hello Node.js");
 // })
 const User = require("./models/userSchema");
+
+app.put("/profile", async (req, res) => {
+  try {
+    var form = new formidable.IncomingForm();
+    form.parse(req, async (err, fields, files) => {
+      let doc = await User.findOneAndUpdate({ _id: fields.id }, fields);
+      await uploadImage(files, fields);
+    res.json({ result: "success", message: "Update Successfully" });
+    });
+  } catch (err) {
+    res.json({ result: "error", message: err.errmsg });
+  }
+});
+
+const uploadImage = async (files, doc) => {
+  if (files.avatars != null) {
+    var fileExtention = files.avatars.name.split(".").pop();
+    doc.avatars = `${Date.now()}+${doc.username}.${fileExtention}`;
+    var newpath =
+      path.resolve(__dirname + "/uploaded/images/") + "/" + doc.avatars;
+
+    if (fs.exists(newpath)) {
+      await fs.remove(newpath);
+    }
+    await fs.move(files.avatars.path, newpath);
+
+    await User.findOneAndUpdate({ _id: doc.id }, doc);
+  }
+};
+app.use(express.static(__dirname + "/uploaded"));
+
 
 app.post("/login", async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });
@@ -49,11 +84,6 @@ app.post("/register", async (req, res) => {
     res.json({ result: "error", message: err.errmsg });
   }
 });
-
-// const connection = mongoose.connection;
-// connection.once('open', () => {
-//     console.log("MongoDB database connection established succesfully");
-// })
 
 
 app.listen(port, () => {

@@ -21,10 +21,9 @@ const Navbar = ({history}) => {
         .then(value => {
           switch (value) {
             case "sure":
-              swal(" SignOut Successfully", "success").then(val => {
+              swal(" SignOut Successfully", "success")
                 localStorage.removeItem("TOKEN_KEY");
-                return history.push("/login");
-              });
+                history.push("/login");
               break;
             case "nope":
               swal("Ok", "success");
