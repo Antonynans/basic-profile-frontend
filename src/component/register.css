@@ -1,0 +1,41 @@
+body {
+  background-color: grey;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.formGroup {
+  height: 50px;
+}
+
+input {
+  /* height: 30px; */
+}
+
+.text-danger {
+  color: red;
+  display: flex;
+  font-size: x-small;
+  justify-content: center;
+}
+
+input.error {
+  border: 1px solid red;
+}
+
+.btn-primary {
+  background-color: inherit;
+  border-color: grey;
+}
+  .btn-primary:hover {
+    background-color: inherit;
+    border-color: grey;
+  }
