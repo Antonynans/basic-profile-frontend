@@ -16,13 +16,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-<<<<<<< HEAD
-
-=======
-// app.get("/", function(req, res, next) {
-//   return res.send("Hello Node.js");
-// })
->>>>>>> 60176c5bb80f87361a40de33f6cacd4109d6b915
 const User = require("./models/userSchema");
 
 app.put("/profile", async (req, res) => {
@@ -55,7 +48,6 @@ const uploadImage = async (files, doc) => {
 };
 app.use(express.static(__dirname + "/uploaded"));
 
-<<<<<<< HEAD
 app.get("/profile/id/:id", async (req, res) => { 
   let doc = await User.findOne({ _id: req.params.id });
   res.json(doc);
@@ -78,8 +70,6 @@ app.get("/profile/id/:id", async (req, res) => {
 //     </div>
 //   );
 // };
-=======
->>>>>>> 60176c5bb80f87361a40de33f6cacd4109d6b915
 
 app.post("/login", async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });

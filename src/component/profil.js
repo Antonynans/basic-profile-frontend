@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import swal from 'sweetalert';
 
-export default function Profile({history}) {
+export default function Profile({props}) {
   const [state, setState] = useState({
     response: {},
     error_message: null,
@@ -34,7 +34,6 @@ export default function Profile({history}) {
         swal('Error!', 'Unexpected error', 'error')
       })
   }
-
   const showPreviewImage = values => {
     return (
       <div className='text-center'>
@@ -91,9 +90,9 @@ export default function Profile({history}) {
     
   },[])
 
-  return(
+  return (
     <Formik
-      enableReinitialize={true}
+    enableReinitialize={true}
     initialValues={
       result
         ? result
@@ -124,48 +123,46 @@ export default function Profile({history}) {
       setSubmitting(false)
       submitForm(formData)
     }}
-
-      validationSchema = {Yup.object().shape({
-        avatars: Yup.mixed()
+    validationSchema = {Yup.object().shape({
+      avatars: Yup.mixed()
         .required('A file is required')
-        // .test(
-        //   'fileSize',
-        //   'File too large',
-        //   value => value && value.size.includes <= FILE_SIZE
-        // )
+        .test(
+          'fileSize',
+          'File too large',
+          value => value && value.size <= FILE_SIZE
+        )
         .test(
           'fileFormat',
           'Unsupported Format',
           value => value && SUPPORTED_FORMATS.includes(value.type)
         ),
-        username: Yup.string()
+      username: Yup.string()
         .min(2, 'username is Too Short!')
         .max(50, 'username is Too Long!')
         .required('username is Required'),
-        firstName: Yup.string()
-          .min(2, "First Name is Too Short!")
-          .max(50, "First Name is Too Long!")
-          .required("First Name is Required"),
-        lastName: Yup.string()
-          .min(2, "Last Name is Too Short!")
-          .max(50, "Last Name is Too Long!")
-          .required("Last Name is Required"),
-          phoneNumber: Yup.string()
-          .matches(/[0-9]\d{10}$/, "Phone number is not valid.")
-          .min(10, 'Phone number is too short!')
-          .max(11, "Too Long!")
-          .required('Phone number is Required'),
-          address: Yup.string()
-          .min(12, 'address is Too Short!')
-          .max(100, 'address is Too Long!')
-          .required('address is Required'),
-        email: Yup.string()
-          .email("Invalid Email")
-          .required("Email is Required"),
-      })}
-    >
-
-      {props => {
+      first_name: Yup.string()
+        .min(2, 'firstname is Too Short!')
+        .max(30, 'firstname is Too Long!')
+        .required('firstname is Required'),
+      last_name: Yup.string()
+        .min(2, 'lastname is Too Short!')
+        .max(30, 'lastname is Too Long!')
+        .required('lastname is Required'),
+      phoneNumber: Yup.string()
+        .matches(/[0-9]\d{10}$/, "Phone number is not valid.")
+        .min(10, 'Phone number is too short!')
+        .max(11, "Too Long!")
+        .required('Phone number is Required'),
+      address: Yup.string()
+        .min(12, 'address is Too Short!')
+        .max(100, 'address is Too Long!')
+        .required('address is Required'),
+      email: Yup.string()
+        .email('Invalid email')
+        .required('Email is Required')
+    })}
+  >
+    {props => {
       const {
         values,
         touched,
@@ -175,10 +172,9 @@ export default function Profile({history}) {
         handleSubmit,
         setFieldValue,
       } = props;
-        
-      
-  return (
-    <div className="">
+
+      return (
+        <div className="">
         <div className=''>
       <section className='content-header'>
         <div className='container-fluid'>
@@ -207,7 +203,7 @@ export default function Profile({history}) {
       
     <div className="form-container">
     <form onSubmit={handleSubmit}>
-  {showPreviewImage(values)}
+  {/* {showPreviewImage(values)} */}
   <div className='card-body'>
     <span style={{ color: '#00B0CD', marginLeft: 10 }}>Add Picture</span>
     <div className='form-group'>
@@ -366,8 +362,8 @@ export default function Profile({history}) {
 </form>
 </div>
 </div>
-  );
-}}
+      );
+      }}
   </Formik>
-  );
-};
+  )
+}
