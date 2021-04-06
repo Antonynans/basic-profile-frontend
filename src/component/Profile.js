@@ -295,7 +295,6 @@ export default function Profile() {
       </small>
     ) : null}
   </div>
-
   <div className='form-group has-feedback'>
     <label htmlFor='username'>Username</label>
     <input
