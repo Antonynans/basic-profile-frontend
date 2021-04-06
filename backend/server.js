@@ -49,6 +49,28 @@ const uploadImage = async (files, doc) => {
 };
 app.use(express.static(__dirname + "/uploaded"));
 
+app.get("/profile/id/:id", async (req, res) => { 
+  let doc = await User.findOne({ _id: req.params.id });
+  res.json(doc);
+});
+
+
+// showPreviewImage = values => {
+//   return (
+//     <div class="text-center">
+//       <img
+//         id="avatars"
+//         src={
+//           values.file_obj != null
+//             ? values.file_obj
+//             : "http://localhost:8080/images/user.png"
+//         }
+//         class="profile-user-img img-fluid img-circle"
+//         width={100}
+//       />
+//     </div>
+//   );
+// };
 
 app.post("/login", async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });
@@ -81,11 +103,6 @@ app.post("/register", async (req, res) => {
   } catch (err) {
     res.json({ result: "error", message: err.errmsg });
   }
-});
-
-app.get("/profile/id/:id", async (req, res) => { 
-  let doc = await Users.findOne({ _id: req.params.id });
-  res.json(doc);
 });
 
 

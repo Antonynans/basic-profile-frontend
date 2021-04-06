@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema({
   avatars: String,
   username: String,
-  firstName: String,
-  lastName: String,
+  firstName: { type: String, default: "" },
+  lastName: { type: String, default: "" },
   email: String,
-  phoneNumber: String,
-  address:String,
+  phoneNumber: { type: String, default: "" },
+  address:{ type: String, default: "" },
   password: String,
   level: {type: String, default: "normal"},
   created: {type: Date, default: Date.now}
