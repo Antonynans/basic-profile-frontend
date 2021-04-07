@@ -9,6 +9,8 @@ const schema = mongoose.Schema({
   phoneNumber: { type: String, default: "" },
   address:{ type: String, default: "" },
   password: String,
+  status: { type: String, default: "not_activated" },
+  activated_token: { type: String, default: "" },
   level: {type: String, default: "normal"},
   created: {type: Date, default: Date.now}
 });

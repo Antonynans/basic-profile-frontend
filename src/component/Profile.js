@@ -131,7 +131,7 @@ export default function Profile({history}) {
         // .test(
         //   'fileSize',
         //   'File too large',
-        //   value => value && value.size.includes <= FILE_SIZE
+        //   value => value.size <= FILE_SIZE
         // )
         .test(
           'fileFormat',
@@ -243,7 +243,6 @@ export default function Profile({history}) {
     </div>
 
     
-{/* {console.log(values)} */}
   <input type='hidden' name='id' value={values._id} />
   <div className='form-group  has-feedback'>
     <label htmlFor='email'>Email address</label>

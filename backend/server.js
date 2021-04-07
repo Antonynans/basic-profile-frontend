@@ -53,28 +53,11 @@ app.get("/profile/id/:id", async (req, res) => {
   res.json(doc);
 });
 
-
-// showPreviewImage = values => {
-//   return (
-//     <div class="text-center">
-//       <img
-//         id="avatars"
-//         src={
-//           values.file_obj != null
-//             ? values.file_obj
-//             : "http://localhost:8080/images/user.png"
-//         }
-//         class="profile-user-img img-fluid img-circle"
-//         width={100}
-//       />
-//     </div>
-//   );
-// };
-
 app.post("/login", async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });
   if (doc) {
     if (bcrypt.compareSync(req.body.password, doc.password)) {
+      if (doc.status != "not_activated") {
       const payload = {
         id: doc._id,
         level: doc.level,
@@ -85,6 +68,12 @@ app.post("/login", async (req, res) => {
       console.log(token);
       res.json({ result: "success", token, message: "Login successful"});
     } else {
+      return res.json({
+        result: "error",
+        message: "You need to activate your account first"
+      });
+    }
+  } else {
       // invalid password
       res.json({ result: "error", message: "Invalid password"});
     }
