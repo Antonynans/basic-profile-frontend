@@ -132,16 +132,11 @@ export default function Register({history}) {
             )}
           </div>
           
-          <div className="btn btn-primary">
-            <button type="submit" disabled={isSubmitting} >Submit</button>
-            <button type="button"
-              onClick={() => {
-                history.push("/login");
-              }}
-              className="btn btn-default btn-block btn-flat"
-            >
-              already registered?
-            </button>
+          <div>
+            <button type="submit" className="formButton" disabled={isSubmitting} >Submit</button>
+          </div>
+          <div className="form-footer">
+            <span><a href="/login"> already registered? </a></span>
           </div>
         </form>
       </div>

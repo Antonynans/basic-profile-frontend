@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import swal from "sweetalert";
-// import "./register.css";
+import "./register.css";
 
 
 export default function Login({history}) {
@@ -28,7 +28,6 @@ export default function Login({history}) {
         .then(res => {
           if (res.data.result === "success") {
             localStorage.setItem("TOKEN_KEY", res.data.token);
-            console.log(res.data.token)
             swal("Success!", res.data.message, "success")
               history.push("/dashboard");
           } else if (res.data.message === "Invalid password") {
@@ -91,24 +90,18 @@ export default function Login({history}) {
               </small>
             )}
           </div>
-          <p class="mb-1">
-              <a href="forgot-password.html">I forgot my password</a>
+          <p>
+              <a href="##">I forgot my password</a>
             </p>
-          <div className="ichceck">
+          <div className="icheck">
               <input type="checkbox" id="remember" />
               <label for="remember">Remember me</label>
           </div>
-          <div className="btn btn-primary">
-            <button type="submit" disabled={isSubmitting} >Sign In</button>
-            <button
-              type="button"
-              onClick={() => {
-                history.push("/register");
-              }}
-              className="btn btn-default btn-block btn-flat"
-            >
-              not yet registered?
-            </button>
+          <div>
+            <button type="submit" className="formButton" disabled={isSubmitting} >Login</button>
+          </div>
+          <div className="form-footer">
+            <span><a href="/register"> not yet registered? </a></span>
           </div>
           
         </form>
