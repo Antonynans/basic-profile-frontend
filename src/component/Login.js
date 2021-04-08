@@ -28,6 +28,7 @@ export default function Login({history}) {
         .then(res => {
           if (res.data.result === "success") {
             localStorage.setItem("TOKEN_KEY", res.data.token);
+            console.log(res.data.token)
             swal("Success!", res.data.message, "success")
               history.push("/dashboard");
           } else if (res.data.message === "Invalid password") {
