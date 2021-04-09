@@ -33,7 +33,7 @@ function App() {
       <div>
      {isLoggedIn() && (
               <>
-                <Navbar /> <Sidebar />
+                {/* <Navbar /> <Sidebar /> */}
               </>
             )}
      <Route path='/register' exact component={Register}/>
