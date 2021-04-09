@@ -14,7 +14,7 @@ export default function Dashboard() {
         {/* <div className=""> */}
           <div className="top-list">
             <li className="breadcrumb-item"><a href="/#">Home</a></li>
-            <li className="breadcrumb-item active">/      Dashboard</li>
+            <li className="breadcrumb-item active">Dashboard</li>
           </div>
         {/* </div> /.col */}
       {/* </div>/.row */}
@@ -87,7 +87,7 @@ export default function Dashboard() {
       {/* Main row */}
       <div className="row">
         {/* Left col */}
-        <section className="connectedSortable">
+        <section className="col-lg-7 connectedSortable">
           {/* Custom tabs (Charts with tabs)*/}
           <div className="card">
             <div className="card-header">
@@ -110,10 +110,10 @@ export default function Dashboard() {
               <div className="tab-content p-0">
                 {/* Morris chart - Sales */}
                 <div className="chart tab-pane active" id="revenue-chart" style={{position: 'relative', height: 300}}>
-                  <canvas id="revenue-chart-canvas" height={300} style={{height: 300}} />                         
+                  <canvas id="revenue-chart-canvas" style={{height: 300}} />                         
                 </div>
                 <div className="chart tab-pane" id="sales-chart" style={{position: 'relative', height: 300}}>
-                  <canvas id="sales-chart-canvas" height={300} style={{height: 300}} />                         
+                  <canvas id="sales-chart-canvas" style={{height: 300}} />                         
                 </div>  
               </div>
             </div>{/* /.card-body */}

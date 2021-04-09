@@ -4,14 +4,33 @@ import * as Yup from "yup";
 import axios from "axios";
 import swal from "sweetalert";
 import "./register.css";
+import { useHistory } from "react-router-dom";
+import ReCaptchaV2 from 'react-google-recaptcha';
 
 
-export default function Login({history}) {
+export default function Login(props) {
+  let history = useHistory();
+
+  const initializeRecaptcha = async => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  };
   useEffect(() => {
+    initializeRecaptcha();
     if (localStorage.getItem("TOKEN_KEY") != null) {
-      return history.goBack();
+      return history.push("/dashboard");
     }
-    
+    let notify = props.match.params["notify"];
+    if (notify !== undefined) {
+      if (notify === "error") {
+        swal("Activation failed. Please try again!", "", "error");
+      } else if (notify === "success") {
+        swal("Activation successful! You can login.", "", "success");
+      }
+    }
   },)
   
   return(
@@ -19,6 +38,7 @@ export default function Login({history}) {
       initialValues={{
         email: '',
         password: '',
+        recaptcha: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
@@ -46,6 +66,7 @@ export default function Login({history}) {
         email: Yup.string()
           .email("Invalid Email")
           .required("Email is Required"),
+        recaptcha: Yup.string().required(),
         password: Yup.string().required("Password is required")
         .min(8, "Password is too short - must be at least 8 characters.")
       })}
@@ -59,6 +80,8 @@ export default function Login({history}) {
         isSubmitting,
         handleChange,
         handleSubmit,
+        setFieldValue,
+        setSubmitting,
       } = props;
         
       
@@ -90,7 +113,28 @@ export default function Login({history}) {
               </small>
             )}
           </div>
-          <p>
+          <div className="g-recaptcha">
+            <label>Recaptcha Validation</label>
+            <ReCaptchaV2 
+            sitekey='6Le4D6MaAAAAAJBshk1VRFBRg9lh7wCDLsVod57G'
+            render="explicit"
+            theme="light"
+            
+            // verifyCallback={response => {
+            //   setFieldValue("recaptcha", response);
+            // }}
+            onChange={(value) => {
+              console.log("$$$$", isSubmitting, value);
+              setFieldValue("recaptcha", value);
+              setSubmitting(false);
+            }}
+            // onloadCallback={() => {
+            //   console.log("done loading!");
+            // }}
+            />
+            {errors.recaptcha && touched.recaptcha && <p>{errors.recaptcha}</p>}
+          </div>
+          <p className='form-footer'>
               <a href="##">I forgot my password</a>
             </p>
           <div className="icheck">

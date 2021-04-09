@@ -3,15 +3,35 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "./register.css";
+import { useHistory } from "react-router-dom";
+import ReCaptchaV2 from 'react-google-recaptcha';
+import swal from "sweetalert";
 
-
-export default function Register({history}) {
+export default function Register(props) {
+  const initializeRecaptcha = async => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  };
   useEffect(() => {
+    initializeRecaptcha();
     if (localStorage.getItem("TOKEN_KEY") != null) {
-      return history.goBack();
+      return history.push("/dashboard");
     }
-    
+    let notify = props.match.params["notify"];
+    if (notify !== undefined) {
+      if (notify === "error") {
+        swal("Activation failed. Please try again!", "", "error");
+      } else if (notify === "success") {
+        swal("Activation successful! You can login.", "", "success");
+      }
+    }
   },)
+
+  let history = useHistory();
+
   return(
     <Formik
       initialValues={{
@@ -19,7 +39,8 @@ export default function Register({history}) {
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        recaptcha: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
@@ -51,6 +72,7 @@ export default function Register({history}) {
         email: Yup.string()
           .email("Invalid Email")
           .required("Email is Required"),
+        recaptcha: Yup.string().required(),
         password: Yup.string().required("Password is required")
         .min(8, "Password is too short - must be at least 8 characters."),
         confirmPassword: Yup.string().oneOf(
@@ -68,6 +90,8 @@ export default function Register({history}) {
         isSubmitting,
         handleChange,
         handleSubmit,
+        setFieldValue,
+        setSubmitting,
       } = props;
         
       
@@ -131,8 +155,27 @@ export default function Register({history}) {
               </small>
             )}
           </div>
-          
-          <div>
+          <div className="g-recaptcha">
+            <label>Recaptcha Validation</label>
+            <ReCaptchaV2 
+            sitekey='6Le4D6MaAAAAAJBshk1VRFBRg9lh7wCDLsVod57G'
+            render="explicit"
+            theme="light"
+            
+            // verifyCallback={response => {
+            //   setFieldValue("recaptcha", response);
+            // }}
+            onChange={(value) => {
+              console.log("$$$$", isSubmitting, value);
+              setFieldValue("recaptcha", value);
+              setSubmitting(false);
+            }}
+            // onloadCallback={() => {
+            //   console.log("done loading!");
+            // }}
+            />
+            {errors.recaptcha && touched.recaptcha && <p>{errors.recaptcha}</p>}
+          </div>          <div>
             <button type="submit" className="formButton" disabled={isSubmitting} >Submit</button>
           </div>
           <div className="form-footer">

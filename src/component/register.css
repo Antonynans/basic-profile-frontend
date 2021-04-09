@@ -34,7 +34,7 @@ p {
 }
 
 .formButton {
-  width: -webkit-fill-available;
+  width: 50%;
   background-color: rgb(39, 145, 194);
   height: 30px;
   border: none;
@@ -42,7 +42,7 @@ p {
 
 .form-footer {
   padding-top: 6px;
-  text-align: end;
+  text-align: center;
 }
 
 input {
@@ -75,3 +75,16 @@ input.error {
     background-color: inherit;
     border-color: grey;
   }
+
+.g-recaptcha {
+  transform:scale(0, 70);
+  -webkit-transform:scale(0.70);
+  transform-origin:0 0;
+  -webkit-transform-origin:0 0;
+  margin-left: 15%;
+  margin-bottom: -10%;
+}
+
+#remember {
+  margin-top: -3%;
+}
