@@ -4,6 +4,7 @@ import "./dashboard.css";
 
 export default function Dashboard() {
   return (
+    <>
     <div className="content-wrapper">
   <div className="content-header">
     {/* <div className="container-fluid">
@@ -572,6 +573,7 @@ export default function Dashboard() {
   </section>
   {/* /.content */}
 </div>
+</>
 
   );
  
