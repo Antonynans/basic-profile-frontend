@@ -3,6 +3,9 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import swal from 'sweetalert';
+import "./profile.css";
+import { Button } from 'react-bootstrap';
+
 
 export default function Profile({history}) {
   const [state, setState] = useState({
@@ -178,8 +181,8 @@ export default function Profile({history}) {
         
       
   return (
-    <div className="">
-        <div className=''>
+    <div className="container">
+        <div className='form-container'>
       <section className='content-header'>
         <div className='container-fluid'>
           <div className='row mb-2'>
@@ -192,22 +195,27 @@ export default function Profile({history}) {
 
       <section className='content'>
         <div className='container-fluid'>
-          <div className='row'>
-            <div className='oet-md-3 col-md-6'>
+          <h5>Update profile</h5>
+            {/* <div className='oet-md-3 col-md-6'>
               <div className='card card-primary'>
                 <div className='card-header'>
-                  <h3 className='card-title'>update profile</h3>
+                  <h3 className='card-title'>Profile</h3>
                 </div>
                 </div>
-            </div>
-          </div>
+            </div> */}
           </div>
         </section>
+          <div className="preview">
+            {showPreviewImage(values)}
+          </div>
+
       </div>
+
       
+
     <div className="form-container">
     <form onSubmit={handleSubmit}>
-  {showPreviewImage(values)}
+  {/* {showPreviewImage(values)} */}
   <div className='card-body'>
     <span style={{ color: '#00B0CD', marginLeft: 10 }}>Add Picture</span>
     <div className='form-group'>
@@ -278,6 +286,13 @@ export default function Profile({history}) {
       id='username'
       placeholder='Enter UserName'
     />
+    {errors.username && touched.username ? (
+      <small id='passwordHelp' className='text-danger'>
+        {errors.username}
+      </small>
+    ) : null}
+  </div>
+  <div className='form-group has-feedback'>
     <label htmlFor='username'>First Name</label>
     <input
       onChange={handleChange}
@@ -357,10 +372,8 @@ export default function Profile({history}) {
     ) : null}
   </div>
 </div> 
-<div className='card-footer'>
-<div className="btn btn-block btn-primary">
-  <button type="submit" disabled={isSubmitting} >Save</button> 
- </div>
+<div className='footer'>
+  <Button type="submit" disabled={isSubmitting} >Save</Button> 
 </div>
 </form>
 </div>

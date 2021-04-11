@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Login from './component/Login';
 import Register from './component/Register';
 import Dashboard from './component/Dashboard';
-import Navbar from './component/navBar/index';
+import NavBar from './component/navBar/index';
 import Footer from './component/Footer';
 import Sidebar from './component/Sidebar';
 import Profile from './component/Profile';
@@ -33,11 +33,13 @@ function App() {
       <div>
      {isLoggedIn() && (
               <>
-                <Navbar /> <Sidebar />
+                <NavBar /> 
+                {/* <Sidebar /> */}
               </>
             )}
      <Route path='/register' exact component={Register}/>
      <Route path='/login' exact component={Login}/>
+     
      <SecuredRoute path="/dashboard" component={Dashboard} />
      <SecuredRoute path="/profile" component={Profile} />
      {isLoggedIn() && <Footer />}

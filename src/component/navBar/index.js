@@ -2,9 +2,10 @@ import React from 'react';
 import swal from "sweetalert";
 import { withRouter, Link } from "react-router-dom";
 import './style.css';
+import {DropdownButton, Dropdown, Navbar, Nav} from 'react-bootstrap';
 
 
-const Navbar = ({history}) => {
+const NavBar = ({history}) => {
     const Logout = () => {
         swal("Are your sure SignOut?", {
           buttons: {
@@ -36,28 +37,35 @@ const Navbar = ({history}) => {
 
     return (
         <>
-            <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+              {/* <Navbar expand="md" fixed="top" variant="dark">
+              <Navbar.Brand className="pl-5" href="#">
+                <li>hello</li>
+              </Navbar.Brand>
+              </Navbar> */}
+
+          <nav className="main-header">
+            <div className="nav">
         {/* Left navbar links */}
-        <ul className="navbar-nav">
-          <li className="nav-item">
+          <ul>
+          {/* <li className="nav-items">
             <a className="nav-link" data-widget="pushmenu" href="##">
               <i className="fas fa-bars" />
             </a>
-          </li>
-          <li className="nav-item d-none d-sm-inline-block">
+          </li> */}
+          <li className="nav-item">
             <a href="/" className="nav-link">
               Home
             </a>
           </li>
-          <li className="nav-item d-none d-sm-inline-block">
+          <li className="nav-item">
             <a href="/#" className="nav-link">
               Contact
             </a>
           </li>
         </ul>
         {/* SEARCH FORM */}
-        <form className="form-inline ml-3">
-          <div className="input-group input-group-sm">
+        <form>
+          <div className="form">
             <input
               className="form-control form-control-navbar"
               type="search"
@@ -71,12 +79,30 @@ const Navbar = ({history}) => {
             </div>
           </div>
         </form>
+        </div>
         {/* Right navbar links */}
-        <ul className="navbar-nav ml-auto">
+        {/* <div className="dropdown">
+          <button className="dropbtn">Menu
+            <i className="fa fa-caret-down" />
+          </button>
+          <div className="dropdown-content">
+            <a href="#">update profile</a>
+            <a href="#">Logout</a>
+          </div>
+        </div> */}
+        <div className="nav-item">
+        <DropdownButton id="dropdown-basic-button" title="Menu">
+          <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+          <Dropdown.Item href="##" onClick={() => Logout()}>Logout</Dropdown.Item>
+          <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
+        </DropdownButton>
+        </div>
+            
+        {/* <ul className="navbar-nav ml-auto"> */}
           {/* Messages Dropdown Menu */}
           {/* Notifications Dropdown Menu */}
 
-          <li className="nav-item dropdown">
+          {/* <li className="dropdown">
             <a className="nav-link" data-toggle="dropdown" href="##">
               <i className="far fa-user" />
             </a>
@@ -97,10 +123,10 @@ const Navbar = ({history}) => {
               </a>
             </div>
           </li>
-        </ul>
+        </ul> */}
       </nav>
 
         </>
     );
 };
-export default withRouter (Navbar);
+export default withRouter (NavBar);

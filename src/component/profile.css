@@ -1,0 +1,33 @@
+.container {
+    justify-content: space-around;
+}
+
+.text-center {
+    margin: 5%;
+}
+
+h3.card-title {
+    text-align: center;
+    width: 100%;
+}
+
+    @media screen and (min-width: 576px) {
+        .content {
+            /* display: flex;
+            align-items: center;
+            margin: 5%; */
+        }
+    }
+
+.footer {
+    width: 100%;
+    text-align: center;
+}
+
+button.btn.btn-primary {
+    width: 50%;
+}
+
+.preview {
+    padding: 15px .5rem;
+}
