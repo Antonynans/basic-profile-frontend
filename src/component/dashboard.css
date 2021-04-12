@@ -5,15 +5,19 @@
   overflow: hidden !important;
 } */
 
-div {
+/* div {
   overflow: hidden;
-}
+} */
 
-.container {
-  /* padding: 2%; */
+/* .container {
+  padding: 2%;
   background-color: #f4f6f9;
   margin: 0;
   margin-top: 40%;
+} */
+
+.content-wrapper {
+  overflow: hidden;
 }
 
 .content-header {
