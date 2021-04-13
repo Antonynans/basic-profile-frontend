@@ -97,33 +97,35 @@ export default function ResetPassword() {
 
   function renderConfirmationForm() {
     return (
-      <div className="reset-password container-fluid">
-       <div className="row justify-content-center">
-         <div className="col-md-4 reset-password-container">
-           <div className="form-container">
+      <div className="container">
+       <div className="">
+         <div className="reset-password-container">
+           <div className="formContainer">
              <div className="text-center">
                <h5>Reset password</h5>
                {/* <p>Hi {fields.email}, enter your new password to continue</p> */}
              </div>
 
       <form onSubmit={handleConfirmClick}>
-        <input
+        <div>
+        <div>
+        <input className="reset-input"
             placeholder="Confirmation Code"
             id="code"
             autoFocus
-            variant="outlined"
-             fullWidth
             type="tel"
             value={fields.code}
             onChange={handleChange}
           />
 
-          <FormText>
+          <FormText className="form-text">
             Please check your email ({fields.email}) for the confirmation code.
           </FormText>
         <hr />
+        </div>
 
-        <input
+        <div>
+        <input className="reset-input"
             placeholder="New Password"
             type="password"
             id="password"
@@ -132,8 +134,9 @@ export default function ResetPassword() {
             value={fields.password}
             onChange={handleChange}
           />
-
-        <input
+        </div>
+        <div>
+        <input className="reset-input"
             placeholder="Confirm Password"
             type="password"
             id="confirmPassword"
@@ -142,15 +145,17 @@ export default function ResetPassword() {
             value={fields.confirmPassword}
             onChange={handleChange}
           />
+        </div>
+        </div>
 
-        <button className="form-control email-btn" 
-          block
+        <Button className="formButton reset-button" 
+        //   block
           type="submit"
           isLoading={isConfirming}
           disabled={!validateResetForm()}
         >
           Confirm
-        </button>
+        </Button>
       </form>
       </div>
       </div>
