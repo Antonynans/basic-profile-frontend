@@ -7,6 +7,7 @@ import NavBar from './component/navBar/index';
 import Footer from './component/Footer';
 import Sidebar from './component/Sidebar';
 import Profile from './component/Profile';
+import ResetPassword from './component/ResetPassword';
 
 const isLoggedIn = () => {
   return localStorage.getItem('TOKEN_KEY') != null;
@@ -39,6 +40,7 @@ function App() {
             )}
      <Route path='/register' exact component={Register}/>
      <Route path='/login' exact component={Login}/>
+     <Route path='/reset-password' exact component={ResetPassword}/>
      
      <SecuredRoute path="/dashboard" component={Dashboard} />
      <SecuredRoute path="/profile" component={Profile} />

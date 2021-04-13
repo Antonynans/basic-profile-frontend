@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import "./register.css";
 import { useHistory } from "react-router-dom";
 import ReCaptchaV2 from 'react-google-recaptcha';
+import { Button } from 'react-bootstrap';
 
 
 export default function Login(props) {
@@ -135,14 +136,14 @@ export default function Login(props) {
             {errors.recaptcha && touched.recaptcha && <p>{errors.recaptcha}</p>}
           </div>
           <p className='form-footer'>
-              <a href="##">I forgot my password</a>
+              <a href="/reset-password">I forgot my password</a>
             </p>
           <div className="icheck">
               <input type="checkbox" id="remember" />
               <label for="remember">Remember me</label>
           </div>
           <div>
-            <button type="submit" className="formButton" disabled={isSubmitting} >Login</button>
+            <Button type="submit" className="formButton" disabled={isSubmitting} >Login</Button>
           </div>
           <div className="form-footer">
             <span><a href="/register"> not yet registered? </a></span>
