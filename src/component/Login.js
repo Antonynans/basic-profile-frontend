@@ -43,11 +43,12 @@ export default function Login(props) {
       }}
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
-        console.log(process.env.REACT_APP_API_URL)
         setSubmitting(false);
         axios
-        .post(process.env.REACT_APP_API_URL + "/login", values)
+        .post(process.env.REACT_APP_API_URL + "login", values)
         .then(res => {
+          console.log(res.data.result)
+
           if (res.data.result === "success") {
             localStorage.setItem("TOKEN_KEY", res.data.token);
             swal("Success!", res.data.message, "success")
@@ -118,7 +119,7 @@ export default function Login(props) {
           <div className="g-recaptcha">
             <label>Recaptcha Validation</label>
             <ReCaptchaV2 
-            sitekey='6Led3KlaAAAAABOMyWq24nbJFQ1qFQ12CXSOX5lX'
+            sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
             render="explicit"
             theme="light"
             
