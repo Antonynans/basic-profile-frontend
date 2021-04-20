@@ -118,7 +118,7 @@ export default function Login(props) {
           <div className="g-recaptcha">
             <label>Recaptcha Validation</label>
             <ReCaptchaV2 
-            sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
+            sitekey='6Led3KlaAAAAABOMyWq24nbJFQ1qFQ12CXSOX5lX'
             render="explicit"
             theme="light"
             
@@ -126,7 +126,7 @@ export default function Login(props) {
             //   setFieldValue("recaptcha", response);
             // }}
             onChange={(value) => {
-              console.log("$$$$", isSubmitting, value);
+              // console.log("$$$$", isSubmitting, value);
               setFieldValue("recaptcha", value);
               setSubmitting(false);
             }}

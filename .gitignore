@@ -10,8 +10,8 @@
 /coverage
 
 # production
-/build
-/backend/.env
+# /build
+.env
 /backend/private.key
 /backend/public.key
 
