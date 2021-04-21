@@ -1,5 +1,5 @@
 {
-  "homepage": "https://myonline-stores.herokuapp.com",
+  "homepage": "https://myonline-stores.herokuapp.com/",
   "name": "pos",
   "version": "0.1.0",
   "private": true,
