@@ -23,7 +23,7 @@ export default function Profile({history}) {
   // form submission
   const submitForm = async formData => {
     await axios
-      .put('http://localhost:5000/profile', formData)
+      .put(process.env.REACT_APP_API_URL + "profile", formData)
       .then(res => {
         console.log(res.data.result)
         if (res.data.result === 'success') {
@@ -46,7 +46,7 @@ export default function Profile({history}) {
           src={
             values.file_obj != null
               ? values.file_obj
-              : 'http://localhost:5000/images/user.png'
+              : process.env.REACT_APP_API_URL + "images/user.png"
           }
           className='profile-user-img img-fluid img-circle'
           width={100}
@@ -75,11 +75,11 @@ export default function Profile({history}) {
 //   a function to store the user id 
   const getData = async id => {
     await axios
-      .get('http://localhost:5000/profile/id/' + id)
+      .get(process.env.REACT_APP_API_URL + "profile/id/" + id)
       .then(response => {
         console.log(response.data)
         document.getElementById('avatars').src =
-          'http://localhost:5000/images/' + response.data.avatars
+        process.env.REACT_APP_API_URL + "images/" + response.data.avatars
         setState({ response: response.data })
       })
       .catch(error => {
