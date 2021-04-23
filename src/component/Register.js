@@ -46,7 +46,7 @@ export default function Register(props) {
       onSubmit={(values, { setSubmitting }) => {
         console.log("logging in", values);
         setSubmitting(false);
-        axios.post("http://localhost:5000/register", values)
+        axios.post(process.env.REACT_APP_API_URL + "register", values)
         .then(res => {
           console.log(res.data.result);
           if (res.data.result === "success") {
